@@ -21,7 +21,7 @@ import android.widget.Toast;
 
 public class MainActivity extends Activity {
 
-	File extStorageFile = Environment.getExternalStorageDirectory();
+	File extStorageFile = Environment.getExternalStorageDirectory(); 
 	String extStoragePath = extStorageFile.getPath();
 	File savedsnaps = new File(extStorageFile + "/savedsnaps");
 	Button ready;
@@ -32,7 +32,7 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
-		ready = new Button(this);
+		ready = new Button(this); //this button will start the timer
 		ready = (Button)findViewById(R.id.button1);
 		ready.setOnClickListener(new OnClickListener(){
 
@@ -48,7 +48,7 @@ public class MainActivity extends Activity {
 	}
 
 	private void startTimers(){
-		timer.schedule(new TimerTask(){
+		timer.schedule(new TimerTask(){ //after 15 seconds copy files. after another 10 seconds rename. 
 
 			@Override
 			public void run() {
@@ -103,6 +103,7 @@ public class MainActivity extends Activity {
 		
 		try {
 			p = Runtime.getRuntime().exec("su");
+			
 			PrintStream stdin = new PrintStream(p.getOutputStream()); 
 			stdin.println("mount -o remount,rw -t yaffs2 /dev/block/mtdblock3 /system");
 			stdin.println("mkdir " + extStoragePath + "/savedsnaps");
